@@ -76,8 +76,7 @@ public class Stemmer {
 			pattern = "(([Ii])([KkPp])(in)?a(g)?(-)*([a-z]-?){3,})";
 			r = Pattern.compile(pattern);
 			m = r.matcher(unprocessedWords.get(i));
-			
-			
+						
 			while (m.find( )) {
 				found = m.group();
 //				System.out.println("Found: " + found);
@@ -127,17 +126,19 @@ public class Stemmer {
 					System.out.println("\nAdded: " + found);
 				}
 			}
-			
-			/** PREFIX CASES: pa, pag, pag-, pam, pang, pang- pinag, pinag-, 
-			 * 				  ma, mag, mag-, mam, man, mang, mang-, mina, 
-			 * 				  na, nag, nag-, nam, nan, nang, nang-, nina */
+		}
+		
+		for (int i = 0; i < unprocessedWords.size(); i++) {
+			/** PREFIX CASES: pa, pag, pag-, pam, pang, pang-, pinag, pinag-, pinang, pinang-, pinam, 
+			 * 				  ma, mag, mag-, mam, man, mang, mang-, min, 
+			 * 				  na, nag, nag-, nam, nan, nang, nang-, nin */
 			pattern = "[MmNn](in)*a(g)?(pa)?(-)*([a-z]-?){3,}";
 			r = Pattern.compile(pattern);
 			m = r.matcher(unprocessedWords.get(i));
 			
 			while (m.find( )) {
 				found = m.group();
-				System.out.println("Found: " + found);
+//				System.out.println("Found: " + found);
 				found.toLowerCase();
 				
 				// Prefix: pa, pag, pag-
@@ -148,7 +149,7 @@ public class Stemmer {
 						arr = found.split("pa", 2);
 					}
 					found = arr[1];
-					if (found.startsWith("-"))
+					if (found.contains("-"))
 						arr = found.split("-", 2);
 					found = arr[1];
 					processedWords.add(found);
@@ -164,7 +165,25 @@ public class Stemmer {
 						arr = found.split("pa", 2);
 					}
 					found = arr[1];
-					if (found.startsWith("-"))
+					if (found.contains("-"))
+						arr = found.split("-", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+				// Prefix/Circumfix: pina, pinag, pinag-, pinam, pinang, pinang-
+				else if (found.startsWith("pina")) {
+					if (found.startsWith("g", 4)) {
+						arr = found.split("pinag", 2);
+					} else if (found.startsWith("m", 4)) {
+						arr = found.split("pinag", 2);
+					} else if (found.startsWith("ng", 4)) {
+						arr = found.split("pinang", 2);
+					} else {
+						arr = found.split("pa", 2);
+					}
+					found = arr[1];
+					if (found.contains("-"))
 						arr = found.split("-", 2);
 					found = arr[1];
 					processedWords.add(found);
@@ -178,7 +197,7 @@ public class Stemmer {
 						arr = found.split("ma", 2);
 					}
 					found = arr[1];
-					if (found.startsWith("-"))
+					if (found.contains("-"))
 						arr = found.split("-", 2);
 					found = arr[1];
 					processedWords.add(found);
@@ -196,8 +215,54 @@ public class Stemmer {
 						arr = found.split("ma", 2);
 					}
 					found = arr[1];
-					if (found.startsWith("-"))
+					if (found.contains("-"))
 						arr = found.split("-", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+				// Prefix: na, nag, nag-
+				else if (found.startsWith("na") && !found.startsWith("ng", 2) && !found.startsWith("m", 2)) {
+					if (found.startsWith("g", 2)) {
+						arr = found.split("nag", 2);
+					} else {
+						arr = found.split("na", 2);
+					}
+					found = arr[1];
+					if (found.contains("-"))
+						arr = found.split("-", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+				// Prefix: nang, nang-
+				else if (found.startsWith("na")) {
+					if (found.startsWith("m", 3)) {
+						arr = found.split("nam", 2);
+					} else if (found.startsWith("n", 3)) {
+						arr = found.split("nan", 2);
+					} else if (found.startsWith("ng", 3)) {
+						arr = found.split("nang", 2);
+					} else {
+						arr = found.split("na", 2);
+					}
+					found = arr[1];
+					if (found.contains("-"))
+						arr = found.split("-", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+				// Prefix/Circumfix: min
+				else if (found.startsWith("min")) {
+					arr = found.split("min", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+				// Prefix/Circumfix: nin
+				else if (found.startsWith("nin")) {
+					arr = found.split("nin", 2);
 					found = arr[1];
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
@@ -205,8 +270,21 @@ public class Stemmer {
 			}
 		}
 		
-		
-		// TODO special case for recurring syllables
+		for (int i = 0; i < unprocessedWords.size(); i++) {
+			/** PREFIX CASES: recurring syllables
+			 * 	SPECIAL CASE NOT INCLUDED: tatrabaho*/
+			pattern = "([A-Za-z]([a-z])?[a-z])\1([a-z]*-?[a-z]*)";
+			r = Pattern.compile(pattern);
+			m = r.matcher(unprocessedWords.get(i));
+			
+			while (m.find( )) {
+				found = m.group(1);
+				System.out.println("Found: " + found);
+				found.toLowerCase();
+				
+				// TODO fix case
+			}
+		}
 		
 		
 		
