@@ -66,6 +66,10 @@ public class Stemmer {
 		String pattern;
 		Pattern r;
 		Matcher m;
+		
+		String found;
+		String[] arr;
+		
 		System.out.println("Unprocessed: " + unprocessedWords.size());
 		for (int i = 0; i < unprocessedWords.size(); i++) {
 			/** PREFIX/CIRCUMFIX CASES: i, ika, ikina, ipa, ipina, ipag, ipinag */
@@ -73,13 +77,12 @@ public class Stemmer {
 			r = Pattern.compile(pattern);
 			m = r.matcher(unprocessedWords.get(i));
 			
-			String found;
-			String[] arr;
+			
 			while (m.find( )) {
 				found = m.group();
-				System.out.println("Found: " + found);
+//				System.out.println("Found: " + found);
 				found.toLowerCase();
-				if (found.startsWith("i"))
+				
 				// Prefix: i
 				if (found.startsWith("i") && !found.startsWith("ika") && !found.startsWith("ipa")) {
 					arr = found.split("i", 2);
@@ -125,14 +128,85 @@ public class Stemmer {
 				}
 			}
 			
-			/** PREFIX CASES: pag, mag, mag-, nag, nag- */
+			/** PREFIX CASES: pa, pag, pag-, pam, pang, pang- pinag, pinag-, 
+			 * 				  ma, mag, mag-, mam, man, mang, mang-, mina, 
+			 * 				  na, nag, nag-, nam, nan, nang, nang-, nina */
 			pattern = "[MmNn](in)*a(g)?(pa)?(-)*([a-z]-?){3,}";
 			r = Pattern.compile(pattern);
 			m = r.matcher(unprocessedWords.get(i));
+			
+			while (m.find( )) {
+				found = m.group();
+				System.out.println("Found: " + found);
+				found.toLowerCase();
+				
+				// Prefix: pa, pag, pag-
+				if (found.startsWith("pa") && !found.startsWith("ng", 2) && !found.startsWith("m", 2)) {
+					if (found.startsWith("g", 2)) {
+						arr = found.split("pag", 2);
+					} else {
+						arr = found.split("pa", 2);
+					}
+					found = arr[1];
+					if (found.startsWith("-"))
+						arr = found.split("-", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+				// Prefix: pam, pang, pang-
+				else if (found.startsWith("pa")) {
+					if (found.startsWith("m", 3)) {
+						arr = found.split("pam", 2);
+					} else if (found.startsWith("ng", 3)) {
+						arr = found.split("pang", 2);
+					} else {
+						arr = found.split("pa", 2);
+					}
+					found = arr[1];
+					if (found.startsWith("-"))
+						arr = found.split("-", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+				// Prefix: ma, mag, mag-
+				else if (found.startsWith("ma") && !found.startsWith("ng", 2) && !found.startsWith("m", 2)) {
+					if (found.startsWith("g", 2)) {
+						arr = found.split("mag", 2);
+					} else {
+						arr = found.split("ma", 2);
+					}
+					found = arr[1];
+					if (found.startsWith("-"))
+						arr = found.split("-", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+				// Prefix: mam, man, mang, mang-
+				else if (found.startsWith("ma")) {
+					if (found.startsWith("m", 3)) {
+						arr = found.split("mam", 2);
+					} else if (found.startsWith("n", 3)) {
+						arr = found.split("man", 2);
+					} else if (found.startsWith("ng", 3)) {
+						arr = found.split("mang", 2);
+					} else {
+						arr = found.split("ma", 2);
+					}
+					found = arr[1];
+					if (found.startsWith("-"))
+						arr = found.split("-", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+			}
 		}
 		
 		
-		
+		// TODO special case for recurring syllables
 		
 		
 		
