@@ -11,8 +11,8 @@ public class Stemmer {
     private ArrayList<String> xmlDates;
 	
 	private ArrayList<String> unprocessedWords;
-	private ArrayList<String> rootWords;
-	
+	private ArrayList<String> processedWords;
+	private ArrayList<String> finalList;	
 	private ProperNounsExtractor namesAndDates = new ProperNounsExtractor();
 	
 	public Stemmer() {
@@ -21,7 +21,8 @@ public class Stemmer {
 		xmlDates = new ArrayList<String>();
 		
 		unprocessedWords = new ArrayList<String>();
-		rootWords = new ArrayList<String>();
+		processedWords = new ArrayList<String>();
+		finalList = new ArrayList<String>();
 	}
 	
 	public void getContents(XMLFileContents xmlFile, ExtractedInfo extractedInfo) {
@@ -64,17 +65,47 @@ public class Stemmer {
 		// SPECIAL CASE: Hinagpis
 		System.out.println("Unprocessed: " + unprocessedWords.size());
 		for (int i = 0; i < unprocessedWords.size(); i++) {
-			/** CASE: ikina, pina, pinag, mag, mag-, nag, nag- */
-			String pattern = "([Ii])*(ki)*([Pp]i)*[MmNn]a(g)?(pa)?(-)*([a-z]-?){3,}";
+			/** PREFIX/CIRCUMFIX CASES: i, ika, ikina, ipa, ipina, ipag, ipinag */
+			String pattern = "(([Ii])*([KkPp])(in)?a(g)?(-)*([a-z]-?){3,})";
 			Pattern r = Pattern.compile(pattern);
 			Matcher m = r.matcher(unprocessedWords.get(i));
 			
+			String found;
+			String[] arr;
 			while (m.find( )) {
-				System.out.println("Found: " + m.group());
-				
+				found = m.group();
+//				System.out.println("Found: " + found);
+				found.toLowerCase();
+				if (found.startsWith("i"))
+				// Prefix: i
+				if (found.startsWith("i") && !found.startsWith("ika") && !found.startsWith("ipa")) {
+					arr = found.split("i", 2);
+					found = arr[1];
+					processedWords.add(found);
+//					System.out.println("\nAdded: " + found);
+				}
+				// Prefix: ikina
+				else if (found.startsWith("ika")) {
+					arr = found.split("ika", 2);
+					found = arr[1];
+					processedWords.add(found);
+//					System.out.println("\nAdded: " + found);
+				}
+				// (i)pina
+				if (found.startsWith("ipa")) {
+					
+					arr = found.split("ipa", 2);
+					found = arr[1];
+					processedWords.add(found);
+//					System.out.println("\nAdded: " + found);
+				}
 			}
+			
+			/** PREFIX CASES: pag, mag, mag-, nag, nag- */
+			String pattern = "[MmNn](in)*a(g)?(pa)?(-)*([a-z]-?){3,}";
+			Pattern r = Pattern.compile(pattern);
+			Matcher m = r.matcher(unprocessedWords.get(i));
 		}
-		
 		
 		
 		
