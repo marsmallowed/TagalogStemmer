@@ -4,7 +4,8 @@ import java.io.IOException;
 
 import model.ExtractedInfo;
 import model.OutputGenerator;
-import model.XMLContentAnalyzer;
+import model.Stemmer;
+import model.ProperNounsExtractor;
 import model.XMLFileContents;
 import utilities.XmlContentParser;
 import view.FileChooser;
@@ -20,10 +21,13 @@ public class Driver {
 		
 		/** Save data to extracted info */
 		ExtractedInfo extractedInfo = new ExtractedInfo();
-		XMLContentAnalyzer contentReader = new XMLContentAnalyzer();
-		contentReader.analyzePeople(xmlFile, extractedInfo);
-        contentReader.analyzeDates(xmlFile, extractedInfo);
-        contentReader.analyzePlaces(xmlFile, extractedInfo);
+//		XMLContentAnalyzer contentReader = new XMLContentAnalyzer();
+//		contentReader.analyzePeople(xmlFile, extractedInfo);
+//        contentReader.analyzeDates(xmlFile, extractedInfo);
+//        contentReader.analyzePlaces(xmlFile, extractedInfo);
+		
+		Stemmer s = new Stemmer();
+		s.getContents(xmlFile, extractedInfo);
                 
 
                 

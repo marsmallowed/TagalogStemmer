@@ -2,18 +2,17 @@ package model;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class XMLContentAnalyzer {
+public class ProperNounsExtractor {
     private ArrayList<String> xmlTitles;
     private ArrayList<String> xmlBodies;
     private ArrayList<String> xmlDates;
     
-    private ArrayList<String> persons = new ArrayList<>();
-    private ArrayList<String> places = new ArrayList<>();;
-    private ArrayList<String> dates = new ArrayList<>();;
+    private ArrayList<String> persons = new ArrayList<String>();
+    private ArrayList<String> places = new ArrayList<String>();;
+    private ArrayList<String> dates = new ArrayList<String>();;
     
     private String ignoreForNg =  "First Gentleman|Indonesia|United States|Armed|President|Department|Social Security System|TV|Equitable-PCI Bank|Misamis Oriental|[A-Z][A-Z][A-Z]|Zamboanga del Norte|Benguet|Lakas Rep.|Sen.|Dr.";
     private String ignoreForSi = "First Gentleman|President|Department|Justice Secretary|Sr. Police Supt.|Rep.|[A-Z][A-Z][A-Z]|Lakas Rep.|Sen.|Dr.";
@@ -27,10 +26,10 @@ public class XMLContentAnalyzer {
        
        for(int i = 0; i < xmlBodies.size(); i++)
        {
-       System.out.println("Body "+i);
-      /**ni x*/
+//       System.out.println("Body "+i);
+      /**si/ni x*/
       String line = xmlBodies.get(i);
-        String  pattern = " [Nn]i (?!First Gentleman|President|Department|[A-Z][A-Z][A-Z]|Lakas Rep.)([A-Z][a-z]* (de la|la)?( [A-Z][a-z]*)?( [A-Z][a-z]*)?)";
+        String  pattern = " [SsNn]i (?!First Gentleman|President|Department|Sen|[A-Z][A-Z][A-Z]|Lakas Rep.)([A-Z][a-z]* (de la|la)?( [A-Z][a-z]*)?( [A-Z][a-z]*)?)";
 
       // Create a Pattern object
       Pattern r = Pattern.compile(pattern);
@@ -38,10 +37,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       Matcher m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
       /**nina x at y*/      
       line = xmlBodies.get(i);
@@ -53,12 +52,12 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
-         System.out.println("Found value: " + m.group(5) );
+//         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(5) );
          persons.add(m.group(1));
          persons.add(m.group(5));
       }
-         System.out.println("------------------------------");	
+//         System.out.println("------------------------------");	
          
          /**si x*/
       line = xmlBodies.get(i);
@@ -70,10 +69,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
   /**kay x*/
      line = xmlBodies.get(i);
@@ -85,10 +84,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
      m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
    /**ng x*/
      line = xmlBodies.get(i);
@@ -100,10 +99,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
      m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
      /**mag-asawang x at y*/      
       line = xmlBodies.get(i);
@@ -115,12 +114,12 @@ public class XMLContentAnalyzer {
       // Now create matcher object. 
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
-         System.out.println("Found value: " + m.group(5) );
+//         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(5) );
          persons.add(m.group(1));
          persons.add(m.group(5));
       }
-         System.out.println("------------------------------");	
+//         System.out.println("------------------------------");	
          
   /**sina x, y, z, at a*/      
       line = xmlBodies.get(i);
@@ -132,16 +131,16 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
-         System.out.println("Found value: " + m.group(2) );
-         System.out.println("Found value: " + m.group(3) );
-         System.out.println("Found value: " + m.group(4) );
+//         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(2) );
+//         System.out.println("Found value: " + m.group(3) );
+//         System.out.println("Found value: " + m.group(4) );
          persons.add(m.group(1));
          persons.add(m.group(2));
          persons.add(m.group(3));
          persons.add(m.group(4));
       }
-         System.out.println("------------------------------");	
+//         System.out.println("------------------------------");	
          
     /**sina XXX at y*/      
       line = xmlBodies.get(i);
@@ -153,12 +152,12 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
-         System.out.println("Found value: " + m.group(2) );
+//         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(2) );
          persons.add(m.group(1));
          persons.add(m.group(2));
       }
-         System.out.println("------------------------------");	
+//         System.out.println("------------------------------");	
          
       /**secretary x*/
       line = xmlBodies.get(i);
@@ -170,10 +169,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
       /**consultant x*/
       line = xmlBodies.get(i);
@@ -185,10 +184,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
       /**First Gentleman x*/
       line = xmlBodies.get(i);
@@ -200,10 +199,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
     /**President x*/
       line = xmlBodies.get(i);
@@ -215,10 +214,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
    /**ni XXX*/
     line = xmlBodies.get(i);
@@ -230,10 +229,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
     m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
     /**si XXX*/
     line = xmlBodies.get(i);
@@ -245,10 +244,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
     m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
     /**Lakas Rep. x*/
       line = xmlBodies.get(i);
@@ -260,10 +259,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
      /**Supt. x*/
       line = xmlBodies.get(i);
@@ -275,10 +274,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
    /**Dr. x*/
       line = xmlBodies.get(i);
@@ -290,10 +289,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
          /**Sen. x*/
       line = xmlBodies.get(i);
@@ -305,10 +304,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
   /**Ms./Mrs./Mr. x*/
       line = xmlBodies.get(i);
@@ -320,10 +319,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
       /**sundalong x*/
       line = xmlBodies.get(i);
@@ -335,10 +334,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
          
      /**hindi x*/
       line = xmlBodies.get(i);
@@ -350,10 +349,10 @@ public class XMLContentAnalyzer {
       // Now create matcher object.
       m = r.matcher(line);
       while (m.find( )) {
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
          persons.add(m.group(1));
       }
-         System.out.println("------------------------------");
+//         System.out.println("------------------------------");
    
 	}
    
@@ -373,7 +372,7 @@ public class XMLContentAnalyzer {
         this.xmlDates = xmlFile.getDates();
 
         for(int i = 0; i < xmlBodies.size(); i++) {
-            System.out.println("Date "+i);
+//            System.out.println("Date "+i);
             /**sa Enero 2015 | Enero 15 | Enero 2* |Enero 2, 2015 | Enero 25, 2015 | Enero 25, '15*/ // DONE
 //            String line = xmlBodies.get(i);
             String line = " Disyembre 29";
@@ -386,11 +385,11 @@ public class XMLContentAnalyzer {
             Matcher m = r.matcher(line);
             while (m.find( )) {
 
-         System.out.println("Found value: " + m.group(1) );
+//         System.out.println("Found value: " + m.group(1) );
 
          dates.add(m.group(1));
             }
-               System.out.println("------------------------------");
+//               System.out.println("------------------------------");
 
             /**sa mm/dd/yy | dd/mm/yy | yy/mm/dd |
               * mm-dd-yy | dd-mm-yy | yy-mm-dd |
@@ -406,9 +405,9 @@ public class XMLContentAnalyzer {
             // Now create matcher object.
             m = r.matcher(line);
             while (m.find( )) {
-               System.out.println("Found value: " + m.group(1) );
+//               System.out.println("Found value: " + m.group(1) );
             }
-            System.out.println("------------------------------");
+//            System.out.println("------------------------------");
                
             /**ika-DD ng Enero | ika-DD ng Enero 2015*/ //DONE 
            line = xmlBodies.get(i);
@@ -421,10 +420,10 @@ public class XMLContentAnalyzer {
            // Now create matcher object.
            m = r.matcher(line);
            while (m.find( )) {
-              System.out.println("Found value: " + m.group(1) );
+//              System.out.println("Found value: " + m.group(1) );
               dates.add(m.group(1));
            }
-           System.out.println("------------------------------");
+//           System.out.println("------------------------------");
            
             /**simula/mula DATE1*/
             line = xmlBodies.get(i);
@@ -437,10 +436,10 @@ public class XMLContentAnalyzer {
             // Now create matcher object.
             m = r.matcher(line);
             while (m.find( )) {
-               System.out.println("Found value: " + m.group(1) );
+//               System.out.println("Found value: " + m.group(1) );
                dates.add(m.group(1));
             }
-            System.out.println("------------------------------");
+//            System.out.println("------------------------------");
             
             /**hanggang WORD DATE1*/
             line = xmlBodies.get(i);
@@ -453,10 +452,10 @@ public class XMLContentAnalyzer {
             // Now create matcher object.
             m = r.matcher(line);
             while (m.find( )) {
-               System.out.println("Found value: " + m.group(1) );
+//               System.out.println("Found value: " + m.group(1) );
                dates.add(m.group(1));
             }
-            System.out.println("------------------------------");
+//            System.out.println("------------------------------");
 
             /**simula/mula DATE2*/
             line = xmlBodies.get(i);
@@ -469,10 +468,10 @@ public class XMLContentAnalyzer {
             // Now create matcher object.
             m = r.matcher(line);
             while (m.find( )) {
-               System.out.println("Found value: " + m.group(1) );
+//               System.out.println("Found value: " + m.group(1) );
                dates.add(m.group(1));
             }
-            System.out.println("------------------------------");
+//            System.out.println("------------------------------");
             
             /**hanggang WORD DATE2*/
             line = xmlBodies.get(i);
@@ -485,10 +484,10 @@ public class XMLContentAnalyzer {
             // Now create matcher object.
             m = r.matcher(line);
             while (m.find( )) {
-               System.out.println("Found value: " + m.group(1) );
+//               System.out.println("Found value: " + m.group(1) );
                dates.add(m.group(1));
             }
-            System.out.println("------------------------------");
+//            System.out.println("------------------------------");
             
             /**simula/mula DATE3*/
             line = xmlBodies.get(i);
@@ -501,10 +500,10 @@ public class XMLContentAnalyzer {
             // Now create matcher object.
             m = r.matcher(line);
             while (m.find( )) {
-               System.out.println("Found value: " + m.group(1) );
+//               System.out.println("Found value: " + m.group(1) );
                dates.add(m.group(1));
             }
-            System.out.println("------------------------------");
+//            System.out.println("------------------------------");
             
             /**hanggang DATE3*/
             line = xmlBodies.get(i);
@@ -517,10 +516,10 @@ public class XMLContentAnalyzer {
             // Now create matcher object.
             m = r.matcher(line);
             while (m.find( )) {
-               System.out.println("Found value: " + m.group(1) );
+//               System.out.println("Found value: " + m.group(1) );
                dates.add(m.group(1));
             }
-            System.out.println("------------------------------");
+//            System.out.println("------------------------------");
             
             /**simula/mula ika DATE*/
             line = xmlBodies.get(i);
@@ -533,10 +532,10 @@ public class XMLContentAnalyzer {
             // Now create matcher object.
             m = r.matcher(line);
             while (m.find( )) {
-               System.out.println("Found value: " + m.group(1) );
+//               System.out.println("Found value: " + m.group(1) );
                dates.add(m.group(1));
             }
-            System.out.println("------------------------------");
+//            System.out.println("------------------------------");
             
             /**hanggang ika DATE*/
             line = xmlBodies.get(i);
@@ -549,10 +548,10 @@ public class XMLContentAnalyzer {
             // Now create matcher object.
             m = r.matcher(line);
             while (m.find( )) {
-               System.out.println("Found value: " + m.group(1) );
+//               System.out.println("Found value: " + m.group(1) );
                dates.add(m.group(1));
             }
-            System.out.println("------------------------------");
+//            System.out.println("------------------------------");
     }
         for(int i=0; i<dates.size(); i++) {
      	   if(dates.get(i)==null)
@@ -570,7 +569,7 @@ public class XMLContentAnalyzer {
 	       
 	       for(int i = 0; i < xmlBodies.size(); i++)
 	       {
-		       System.out.println("Body "+i);
+//		       System.out.println("Body "+i);
 		      /**ni x*/
 		      String line = xmlBodies.get(i);
 		      String  pattern = "ni( [A-Z][a-z]*\\.*)+ ng( [A-Z][a-z]*)*";
@@ -581,11 +580,11 @@ public class XMLContentAnalyzer {
 		      // Now create matcher object.
 		      Matcher m = r.matcher(line);
 		      while (m.find( )) {
-		         System.out.println("Found value: " + m.group(2) );
+//		         System.out.println("Found value: " + m.group(2) );
 		         if(m.group(2)!=null)
 		        	 places.add(m.group(2));
 		      }
-		         System.out.println("------------------------------");
+//		         System.out.println("------------------------------");
 	         
 		         /** sila sa x */
 		         line = xmlBodies.get(i);
@@ -597,11 +596,11 @@ public class XMLContentAnalyzer {
 			        // Now create matcher object.
 			       m = r.matcher(line);
 			        while (m.find( )) {
-			           System.out.println("Found value: " + m.group(1) );
+//			           System.out.println("Found value: " + m.group(1) );
 			           if(m.group(1)!=null)
 				        	 places.add(m.group(1));
 			        }
-			           System.out.println("------------------------------");
+//			           System.out.println("------------------------------");
 		           
 		           /** nagtungo sa x */
 			         line = xmlBodies.get(i);
@@ -613,11 +612,11 @@ public class XMLContentAnalyzer {
 				        // Now create matcher object.
 				       m = r.matcher(line);
 				        while (m.find( )) {
-				           System.out.println("Found value: " + m.group(1) );
+//				           System.out.println("Found value: " + m.group(1) );
 				           if(m.group(1)!=null)
 					        	 places.add(m.group(1));
 				        }
-				           System.out.println("------------------------------");
+//				           System.out.println("------------------------------");
 					  
 		           /** x city */
 			         line = xmlBodies.get(i);
@@ -629,10 +628,10 @@ public class XMLContentAnalyzer {
 				        // Now create matcher object.
 				       m = r.matcher(line);
 				        while (m.find( )) {
-				           System.out.println("Found value: " + m.group(0) );
+//				           System.out.println("Found value: " + m.group(0) );
 				           places.add(m.group(0));
 				        }
-				           System.out.println("------------------------------");
+//				           System.out.println("------------------------------");
 				           
 	           /**sa bgy. x | sa x, y | x city*/
 		         line = xmlBodies.get(i);
@@ -644,11 +643,11 @@ public class XMLContentAnalyzer {
 			        // Now create matcher object.
 			       m = r.matcher(line);
 			        while (m.find( )) {
-			           System.out.println("Found value: " + m.group(1) );
+//			           System.out.println("Found value: " + m.group(1) );
 			           if(m.group(1)!=null)
 				        	 places.add(m.group(1));
 			        }
-			           System.out.println("------------------------------");
+//			           System.out.println("------------------------------");
 	       
 	       }
 	       
@@ -658,5 +657,17 @@ public class XMLContentAnalyzer {
 	     		  places.remove(i);
 	        }
 	     extractedInfo.setPlaces(places);
+    }
+    
+    public ArrayList<String> getPeople() {
+    	return persons;
+    }
+    
+    public ArrayList<String> getPlaces() {
+    	return places;
+    }
+    
+    public ArrayList<String> getDates() {
+    	return dates;
     }
 }
