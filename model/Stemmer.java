@@ -42,6 +42,7 @@ public class Stemmer {
 		for (int i = 0; i < namesAndDates.getDates().size(); i++)
 			notIncluded.add(namesAndDates.getDates().get(i));
 		
+		/** gets only the common nouns (DEPENDENT ON PROPERNOUNSEXTRACTOR) */
 		for (int i = 0; i < 1; i++) {
 			System.out.println("Body " + i);
 			String line = xmlBodies.get(i);
@@ -51,10 +52,9 @@ public class Stemmer {
 			
 			Matcher m = r.matcher(line);
 			while (m.find( )) {
-				System.out.print(m.group() + "");
-				if (!notIncluded.contains(m.group()))
+				if (!notIncluded.contains(m.group())) {
 					unprocessedWords.add(m.group());
-				else System.out.print("!!\t");
+				}
 			}
 		}		
 	}
@@ -62,5 +62,34 @@ public class Stemmer {
 	public void analyzeWords() {
 		// TODO refer to pdf for cases.
 		// SPECIAL CASE: Hinagpis
+		System.out.println("Unprocessed: " + unprocessedWords.size());
+		for (int i = 0; i < unprocessedWords.size(); i++) {
+			/** CASE: ikina, pina, pinag, mag, mag-, nag, nag- */
+			String pattern = "([Ii])*(ki)*([Pp]i)*[MmNn]a(g)?(pa)?(-)*([a-z]-?){3,}";
+			Pattern r = Pattern.compile(pattern);
+			Matcher m = r.matcher(unprocessedWords.get(i));
+			
+			while (m.find( )) {
+				System.out.println("Found: " + m.group());
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 }
