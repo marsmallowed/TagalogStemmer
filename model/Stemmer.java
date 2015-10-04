@@ -69,6 +69,8 @@ public class Stemmer {
 		
 		String found;
 		String[] arr;
+                String firstTwoChars;
+                String nextTwoChars;
 		
 		System.out.println("Unprocessed: " + unprocessedWords.size());
     
@@ -340,11 +342,22 @@ public class Stemmer {
 			m = r.matcher(unprocessedWords.get(i));
 			
 			while (m.find( )) {
-				found = m.group(1);
+				//found = m.group(1);
+                                found = m.group();
 				System.out.println("Found: " + found);
 				found.toLowerCase();
 				
 				// TODO fix case
+                                firstTwoChars = found.substring(0, 2);
+                                nextTwoChars = found.substring(2, 4);
+                                
+                                if(firstTwoChars.equals(nextTwoChars))
+                                {
+                                arr = found.split(firstTwoChars, 2);
+                                found = arr[1];
+                                processedWords.add(found);
+                                System.out.println("\nAdded: " + found);
+                                }
 			}
 		}
 		
