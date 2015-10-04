@@ -88,18 +88,21 @@ public class Stemmer {
                             if (found.startsWith("tag") && !found.startsWith("taga") && !found.startsWith("tagapag")) {
 					arr = found.split("tag", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
                             else if (found.startsWith("taga")) {
 					arr = found.split("taga", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
                             else if (found.startsWith("tagapag")) {
 					arr = found.split("tagapag", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -120,6 +123,7 @@ public class Stemmer {
                             if (found.startsWith("ka")) {
 					arr = found.split("ka", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -141,6 +145,7 @@ public class Stemmer {
 				if (found.startsWith("i") && !found.startsWith("ika") && !found.startsWith("ipa")) {
 					arr = found.split("i", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -148,6 +153,7 @@ public class Stemmer {
 				else if (found.startsWith("ika")) {
 					arr = found.split("ika", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -155,6 +161,7 @@ public class Stemmer {
 				else if (found.startsWith("ikina")) {
 					arr = found.split("ikina", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -166,6 +173,7 @@ public class Stemmer {
 						arr = found.split("ipa", 2);
 					}
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -177,6 +185,7 @@ public class Stemmer {
 						arr = found.split("ipina", 2);
 					}
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -186,6 +195,7 @@ public class Stemmer {
                                     arr = found.split("ipinaki", 2);
 				
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -216,6 +226,7 @@ public class Stemmer {
 					if (found.contains("-"))
 						arr = found.split("-", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -232,6 +243,7 @@ public class Stemmer {
 					if (found.contains("-"))
 						arr = found.split("-", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -250,6 +262,7 @@ public class Stemmer {
 					if (found.contains("-"))
 						arr = found.split("-", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -264,6 +277,7 @@ public class Stemmer {
 					if (found.contains("-"))
 						arr = found.split("-", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -282,6 +296,7 @@ public class Stemmer {
 					if (found.contains("-"))
 						arr = found.split("-", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -296,6 +311,7 @@ public class Stemmer {
 					if (found.contains("-"))
 						arr = found.split("-", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -314,6 +330,7 @@ public class Stemmer {
 					if (found.contains("-"))
 						arr = found.split("-", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -321,6 +338,7 @@ public class Stemmer {
 				else if (found.startsWith("min")) {
 					arr = found.split("min", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -328,6 +346,7 @@ public class Stemmer {
 				else if (found.startsWith("nin")) {
 					arr = found.split("nin", 2);
 					found = arr[1];
+                                        unprocessedWords.remove(i);
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
@@ -355,11 +374,34 @@ public class Stemmer {
                                 {
                                 arr = found.split(firstTwoChars, 2);
                                 found = arr[1];
+                                unprocessedWords.remove(i);
                                 processedWords.add(found);
                                 System.out.println("\nAdded: " + found);
                                 }
 			}
 		}
+                /** START OF SUFFIXES*/
+                    for (int i = 0; i < unprocessedWords.size(); i++) {
+                    /** Suffix CASES: an */
+                    pattern = "(([a-z]*)an)";
+                    r = Pattern.compile(pattern);
+                    m = r.matcher(unprocessedWords.get(i));
+                    
+                    while (m.find( )) {
+                            found = m.group();
+                            found = "kainan";
+                            found.toLowerCase();
+                            
+                            //Suffix: an
+                            if (found.endsWith("an")) {
+					found = found.substring(0, found.length() - 2);
+					//found = arr[1];
+                                        unprocessedWords.remove(i);
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+                    }
+                }
 		
 		
 		
