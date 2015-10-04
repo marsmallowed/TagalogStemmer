@@ -15,6 +15,7 @@ public class Stemmer {
 	private ArrayList<String> reprocessWords;
 	
 	private ProperNounsExtractor namesAndDates = new ProperNounsExtractor();
+	private ExemptedWords exceptions = new ExemptedWords();
 	
 	public Stemmer() {
 		xmlTitles = new ArrayList<String>();
