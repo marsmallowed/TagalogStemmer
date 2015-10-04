@@ -71,8 +71,61 @@ public class Stemmer {
 		String[] arr;
 		
 		System.out.println("Unprocessed: " + unprocessedWords.size());
+    
+                for (int i = 0; i < unprocessedWords.size(); i++) {
+                    /** PREFIX CASES: tag taga tagapag */
+                    pattern = "(([Tt])ag(a)?(pag)?(-)*([a-z]-?){3,})";
+                    r = Pattern.compile(pattern);
+                    m = r.matcher(unprocessedWords.get(i));
+                    
+                    while (m.find( )) {
+                            found = m.group();
+                            found.toLowerCase();
+                            
+                            //Prefix: ka
+                            if (found.startsWith("tag") && !found.startsWith("taga") && !found.startsWith("tagapag")) {
+					arr = found.split("tag", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+                            else if (found.startsWith("taga")) {
+					arr = found.split("taga", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+                            else if (found.startsWith("tagapag")) {
+					arr = found.split("tagapag", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+                    }
+                }
+                
+                for (int i = 0; i < unprocessedWords.size(); i++) {
+                    /** PREFIX CASES: ka */
+                    pattern = "(([Kk])a(-)*([a-z]-?){3,})";
+                    r = Pattern.compile(pattern);
+                    m = r.matcher(unprocessedWords.get(i));
+                    
+                    while (m.find( )) {
+                            found = m.group();
+                            found.toLowerCase();
+                            
+                            //Prefix: ka
+                            if (found.startsWith("ka")) {
+					arr = found.split("ka", 2);
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+                    }
+                }
+                
 		for (int i = 0; i < unprocessedWords.size(); i++) {
-			/** PREFIX/CIRCUMFIX CASES: i, ika, ikina, ipa, ipina, ipag, ipinag */
+			/** PREFIX/CIRCUMFIX CASES: i, ika, ikina, ipa, ipina, ipag, ipinag ipaki */
 			pattern = "(([Ii])([KkPp])(in)?a(g)?(-)*([a-z]-?){3,})";
 			r = Pattern.compile(pattern);
 			m = r.matcher(unprocessedWords.get(i));
@@ -121,6 +174,15 @@ public class Stemmer {
 					} else {
 						arr = found.split("ipina", 2);
 					}
+					found = arr[1];
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+				// Prefix: ipaki
+				else if (found.startsWith("ipaki")) {
+					
+                                    arr = found.split("ipinaki", 2);
+				
 					found = arr[1];
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
