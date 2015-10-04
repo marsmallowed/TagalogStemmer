@@ -29,6 +29,7 @@ public class Driver {
 		Stemmer s = new Stemmer();
 		s.getContents(xmlFile, extractedInfo);
 		s.analyzeWords();
+                s.analyzeProcessedWords();
                 
 
                 

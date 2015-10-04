@@ -457,4 +457,56 @@ public class Stemmer {
 		
 		
 	}
+
+    public void analyzeProcessedWords()
+    {
+        String pattern;
+		Pattern r;
+		Matcher m;
+		
+		String found;
+		String[] arr;
+       /** START OF SUFFIXES*/
+                    for (int i = 0; i < processedWords.size(); i++) {
+                        
+               /** Suffix CASES: an */
+                    pattern = "(([a-z]*)an)";
+                    r = Pattern.compile(pattern);
+                    m = r.matcher(processedWords.get(i));
+                    
+                    while (m.find( )) {
+                            found = m.group();
+                            found.toLowerCase();
+                            
+                            //Suffix: an
+                            if (found.endsWith("an")) {
+					found = found.substring(0, found.length() - 2);
+					//found = arr[1];
+                                        processedWords.remove(i);
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+                    }
+                }
+                    for (int i = 0; i < processedWords.size(); i++) {
+               /** Suffix CASES: in */
+                    pattern = "(([a-z]*)in)";
+                    r = Pattern.compile(pattern);
+                    m = r.matcher(processedWords.get(i));
+                    
+                    while (m.find( )) {
+                            found = m.group();
+                            found.toLowerCase();
+                            
+                            //Suffix: an
+                            if (found.endsWith("in")) {
+					found = found.substring(0, found.length() - 2);
+					//found = arr[1];
+                                        processedWords.remove(i);
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+                    }
+                }
+    }
 }
