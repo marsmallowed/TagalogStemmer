@@ -366,7 +366,6 @@ public class Stemmer {
 				System.out.println("Found: " + found);
 				found.toLowerCase();
 				
-				// TODO fix case
                                 firstTwoChars = found.substring(0, 2);
                                 nextTwoChars = found.substring(2, 4);
                                 
@@ -389,7 +388,6 @@ public class Stemmer {
                     
                     while (m.find( )) {
                             found = m.group();
-                            found = "kainan";
                             found.toLowerCase();
                             
                             //Suffix: an
