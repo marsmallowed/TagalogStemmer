@@ -381,7 +381,8 @@ public class Stemmer {
 		}
                 /** START OF SUFFIXES*/
                     for (int i = 0; i < unprocessedWords.size(); i++) {
-                    /** Suffix CASES: an */
+                        
+               /** Suffix CASES: an */
                     pattern = "(([a-z]*)an)";
                     r = Pattern.compile(pattern);
                     m = r.matcher(unprocessedWords.get(i));
@@ -398,6 +399,48 @@ public class Stemmer {
 					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				}
+                    }
+                }
+                    for (int i = 0; i < unprocessedWords.size(); i++) {
+               /** Suffix CASES: in */
+                    pattern = "(([a-z]*)in)";
+                    r = Pattern.compile(pattern);
+                    m = r.matcher(unprocessedWords.get(i));
+                    
+                    while (m.find( )) {
+                            found = m.group();
+                            found.toLowerCase();
+                            
+                            //Suffix: an
+                            if (found.endsWith("in")) {
+					found = found.substring(0, found.length() - 2);
+					//found = arr[1];
+                                        unprocessedWords.remove(i);
+					processedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				}
+                    }
+                }
+                    
+                /** START OF INFIX*/
+                    for (int i = 0; i < unprocessedWords.size(); i++) {
+               /** Infix CASES: um */
+                    pattern = "(([a-z])*um[aeiou][a-z]*)";
+                    r = Pattern.compile(pattern);
+                    m = r.matcher(unprocessedWords.get(i));
+                    
+                    while (m.find( )) {
+                            found = m.group();
+                            found.toLowerCase();
+                            
+                            //Inffix: um
+                            
+					found = found.replace("um", "");
+					//found = arr[1];
+                                        unprocessedWords.remove(i);
+					unprocessedWords.add(found);
+					System.out.println("\nAdded: " + found);
+				
                     }
                 }
 		
