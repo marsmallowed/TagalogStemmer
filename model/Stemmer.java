@@ -577,7 +577,8 @@ public class Stemmer {
 //				}
 //                    }
 //                }
-    	reprocessWords = new ArrayList<String>(processedWords);
+    	unprocessedWords = new ArrayList<String>(processedWords);
+    	processedWords = new ArrayList<String>();
     	analyzeWords();
     }
 }
