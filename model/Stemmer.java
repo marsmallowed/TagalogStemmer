@@ -379,6 +379,33 @@ public class Stemmer {
                                 }
 			}
 		}
+                
+                		for (int i = 0; i < unprocessedWords.size(); i++) {
+			/** PREFIX CASES: recurring syllables
+			 * 	SPECIAL CASE NOT INCLUDED: tatrabaho*/
+			pattern = "([A-Za-z]([a-z])?[a-z])\1([a-z]*-?[a-z]*)";
+			r = Pattern.compile(pattern);
+			m = r.matcher(unprocessedWords.get(i));
+			
+			while (m.find( )) {
+				//found = m.group(1);
+                                found = m.group();
+				System.out.println("Found: " + found);
+				found.toLowerCase();
+				
+                                firstTwoChars = found.substring(0, 2);
+                                nextTwoChars = found.substring(2, 4);
+                                
+                                if(firstTwoChars.equals(nextTwoChars))
+                                {
+                                arr = found.split(firstTwoChars, 2);
+                                found = arr[1];
+                                unprocessedWords.remove(i);
+                                processedWords.add(found);
+                                System.out.println("\nAdded: " + found);
+                                }
+			}
+		}
                 /** START OF SUFFIXES*/
                     for (int i = 0; i < unprocessedWords.size(); i++) {
                         
@@ -438,7 +465,7 @@ public class Stemmer {
 					found = found.replace("um", "");
 					//found = arr[1];
                                         unprocessedWords.remove(i);
-					unprocessedWords.add(found);
+					processedWords.add(found);
 					System.out.println("\nAdded: " + found);
 				
                     }
